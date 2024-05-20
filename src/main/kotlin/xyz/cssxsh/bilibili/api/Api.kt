@@ -108,15 +108,6 @@ internal suspend inline fun <reified T> BiliClient.json(
         try {
             BiliClient.Json.decodeFromJsonElement(element)
         } catch (cause: SerializationException) {
-            val path = System.getProperty(EXCEPTION_JSON_CACHE)
-            supervisorScope {
-                if (path != null) launch {
-                    val folder = File(path)
-                    folder.mkdirs()
-                    folder.resolve("exception.${System.currentTimeMillis()}.json")
-                        .writeText(BiliClient.Json.encodeToString(element))
-                }
-            }
             throw cause
         }
     }

@@ -23,7 +23,7 @@ data class EmoteItem(
     @SerialName("id")
     val id: Int,
     @SerialName("mtime")
-    val mtime: Long,
+    val mtime: Long? = null,
     @SerialName("text")
     val text: String,
     @SerialName("type")
